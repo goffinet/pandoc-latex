@@ -24,6 +24,6 @@ RUN apk add --no-cache \
 
 RUN /usr/bin/chromium-browser --version
 
-COPY puppeteerConfigFile.json /etc/puppeteerConfigFile.json
+COPY puppeteerConfigFile.json /etc/puppeteer.json
 
 RUN npm install --global mermaid-filter --unsafe-perm=true && npm install
