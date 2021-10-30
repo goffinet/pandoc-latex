@@ -46,6 +46,8 @@ RUN wget https://github.com/jgm/pandoc/releases/download/2.15/pandoc-2.15-linux-
 
 RUN yarn add mermaid mermaid.cli
 
+RUN mkdir -p /data
+
 COPY pandoc_filter.py /pandoc_filter.py
 
 RUN chmod +x /pandoc_filter.py
@@ -53,3 +55,5 @@ RUN chmod +x /pandoc_filter.py
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get -y -q autoremove \
   && rm -rf /var/lib/apt/lists/
+
+WORKDIR /data
