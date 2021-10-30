@@ -7,7 +7,6 @@ ENV \
     DATA_DIRECTORY=/data \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
-
 RUN apk add --no-cache \
     chromium \
     nss \
