@@ -24,7 +24,6 @@ RUN apk add --no-cache msttcorefonts-installer fontconfig
 
 RUN update-ms-fonts
 
-# Installs latest Chromium package.
 RUN apk add --no-cache \
     msttcorefonts-installer fontconfig \
     font-noto \
