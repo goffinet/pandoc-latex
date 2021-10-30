@@ -1,6 +1,12 @@
-FROM pandoc/latex:2.11.2
+FROM pandoc/latex
 
 LABEL org.opencontainers.image.source https://github.com/goffinet/pandoc-latex
+
+# Create /data dir where files can be read/written.
+ENV \
+    DATA_DIRECTORY=/data \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 
 RUN apk add --no-cache \
     chromium \
@@ -15,20 +21,15 @@ RUN apk add --no-cache \
     ttf-ubuntu-font-family \
     font-noto
 
-# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+RUN /usr/bin/chromium-browser --version
 
-# Add user so we don't need --no-sandbox.
-RUN chmod o+w /opt/texlive/texdir/texmf-var
+# Puppeteer v0.11.0 works with Chromium 63.
+RUN yarn add puppeteer@1.8.0 mermaid.cli@0.5.1
 
-# Puppeteer v5.2.1 works with Chromium 85.
-RUN yarn add eslint puppeteer@5.2.1 mermaid-filter
+COPY puppeteerConfigFile.json /etc/puppeteerConfigFile.json
 
-# Install Tex Gyre Termes font
-RUN tlmgr update --self && tlmgr install tex-gyre tex-gyre-math selnolig
+# Symlink to PATH.
+RUN ln -sf /node_modules/mermaid.cli/index.bundle.js /usr/local/bin/mmdc
 
-# Install Noto Color Emoji
-RUN fc-cache -fv
-
-COPY puppeteerConfigFile.json /root/.puppeteer.json
+# Create data directory.
+RUN mkdir -p ${DATA_DIRECTORY}
