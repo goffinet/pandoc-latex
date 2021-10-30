@@ -17,8 +17,7 @@ RUN apk add --no-cache \
 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
-    PATH="/data/node_modules/.bin:${PATH}"
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Add user so we don't need --no-sandbox.
 RUN chmod o+w /opt/texlive/texdir/texmf-var
@@ -31,3 +30,5 @@ RUN tlmgr update --self && tlmgr install tex-gyre tex-gyre-math selnolig
 
 # Install Noto Color Emoji
 RUN fc-cache -fv
+
+COPY puppeteerConfigFile.json /root/.puppeteer.json
