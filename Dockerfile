@@ -20,7 +20,8 @@ RUN apk add --no-cache \
     npm \
     yarn \
     ttf-ubuntu-font-family \
-    font-noto
+    font-noto \
+    && fc-cache -fv
 
 RUN /usr/bin/chromium-browser --version
 
