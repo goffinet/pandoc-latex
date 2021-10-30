@@ -23,6 +23,4 @@ RUN apk add --no-cache \
     font-noto \
     && fc-cache -fv
 
-RUN /usr/bin/chromium-browser --version
-
 RUN npm install --global mermaid-filter --unsafe-perm=true && npm install
