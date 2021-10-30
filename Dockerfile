@@ -25,7 +25,7 @@ RUN apk add --no-cache \
     ttf-opensans \
     font-misc-misc \
     font-croscore \
-    ttf-ubuntu-font-family
+    ttf-ubuntu-font-family \
     && update-ms-fonts \
     && fc-cache -f \
     && rm -rf /var/cache/*
