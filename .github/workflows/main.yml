@@ -1,4 +1,4 @@
-name: ubi-base build
+name: container build
 
 on:
   push:
