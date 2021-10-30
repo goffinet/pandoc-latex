@@ -1,19 +1,29 @@
-FROM pandoc/latex:2.14.1
+RUN apk add --no-cache \
+    chromium \
+    nss \
+    freetype \
+    freetype-dev \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    nodejs \
+    yarn \
+    ttf-ubuntu-font-family \
+    noto-fonts
 
-# Install additional TeX packages such as those used by eisvogel template
+# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
+    PATH="/data/node_modules/.bin:${PATH}"
 
-RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
-    tlmgr update \
-    && tlmgr update --self \
-    && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
-    sourcecodepro titling pagecolor epstopdf zref footnotebackref \
-    && apk add --update ghostscript \
-    && apt add font-noto
+# Add user so we don't need --no-sandbox.
+RUN chmod o+w /opt/texlive/texdir/texmf-var
 
-# Install Node and mermaid-filter
+# Puppeteer v5.2.1 works with Chromium 85.
+RUN yarn add eslint puppeteer@5.2.1 mermaid-filter
 
-ENV CHROME_BIN="/usr/bin/chromium-browser" \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
+# Install Tex Gyre Termes font
+RUN tlmgr update --self && tlmgr install tex-gyre tex-gyre-math selnolig
 
-RUN apk add --update udev ttf-freefont chromium npm \
-    && npm install -g mermaid-filter --unsafe-perm=true
+# Install Noto Color Emoji
+RUN fc-cache -fv
