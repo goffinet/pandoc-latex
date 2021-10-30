@@ -7,7 +7,7 @@ RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
     && tlmgr update --self \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
     sourcecodepro titling pagecolor epstopdf zref footnotebackref \
-    && apk add --update ghostscript
+    && apk add --update ghostscript \
     && apt add font-noto
 
 # Install Node and mermaid-filter
