@@ -24,4 +24,4 @@ RUN apk add --no-cache \
 
 RUN /usr/bin/chromium-browser --version
 
-RUN npm install --global mermaid-filter
+RUN npm install --global mermaid-filter --unsafe-perm=true
