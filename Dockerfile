@@ -4,6 +4,7 @@ FROM pandoc/latex:2.14.1
 
 RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
     tlmgr update \
+    && tlmgr update --self \
     && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
     sourcecodepro titling pagecolor epstopdf zref footnotebackref \
     && apk add --update ghostscript
