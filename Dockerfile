@@ -45,6 +45,6 @@ RUN mkdir -p /usr/share/fonts/truetype/noto \
     && fc-cache -fv
 
 # Run everything after as non-privileged user.
-USER pptruser
-WORKDIR /home/pptruser
-COPY puppeteerConfigFile.json /home/pptruser/.puppeteer.json
+#USER pptruser
+#WORKDIR /home/pptruser
+#COPY puppeteerConfigFile.json /home/pptruser/.puppeteer.json
