@@ -17,19 +17,11 @@ RUN apk add --no-cache \
     ca-certificates \
     ttf-freefont \
     nodejs \
+    npm \
     yarn \
     ttf-ubuntu-font-family \
     font-noto
 
 RUN /usr/bin/chromium-browser --version
 
-# Puppeteer v0.11.0 works with Chromium 63.
-RUN yarn add puppeteer@1.8.0 mermaid.cli@0.5.1
-
-COPY puppeteerConfigFile.json /etc/puppeteerConfigFile.json
-
-# Symlink to PATH.
-RUN ln -sf /node_modules/mermaid.cli/index.bundle.js /usr/local/bin/mmdc
-
-# Create data directory.
-RUN mkdir -p ${DATA_DIRECTORY}
+RUN npm install --global mermaid-filter
