@@ -26,4 +26,4 @@ RUN /usr/bin/chromium-browser --version
 
 COPY puppeteerConfigFile.json /etc/puppeteerConfigFile.json
 
-RUN npm install --global mermaid-filter --unsafe-perm=true
+RUN npm install --global mermaid-filter --unsafe-perm=true && npm install
