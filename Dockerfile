@@ -1,3 +1,7 @@
+FROM pandoc/latex:2.11.2
+
+LABEL org.opencontainers.image.source https://github.com/goffinet/pandoc-latex
+
 RUN apk add --no-cache \
     chromium \
     nss \
