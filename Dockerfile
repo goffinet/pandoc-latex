@@ -2,7 +2,6 @@ FROM pandoc/latex
 
 LABEL org.opencontainers.image.source https://github.com/goffinet/pandoc-latex
 
-# Create /data dir where files can be read/written.
 ENV \
     DATA_DIRECTORY=/data \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
@@ -18,7 +17,8 @@ RUN apk add --no-cache \
     nodejs \
     npm \
     yarn \
-    msttcorefonts-installer fontconfig \
+    msttcorefonts-installer \
+    fontconfig \
     font-noto \
     terminus-font \
     ttf-opensans \
@@ -31,4 +31,4 @@ RUN apk add --no-cache \
 
 RUN npm install --global mermaid-filter --unsafe-perm=true && npm install
 
-RUN fc-list : family | cut -f1 -d"," | sort | uniq 
+RUN fc-list : family | cut -f1 -d"," | sort | uniq
