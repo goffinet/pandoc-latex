@@ -28,6 +28,8 @@ RUN apk add --no-cache \
     && fc-cache -f \
     && rm -rf /var/cache/*
 
-RUN npm install --global mermaid-filter --unsafe-perm=true && npm install
+RUN npm install --global mermaid-filter --unsafe-perm=true
+
+RUN npm install
 
 RUN fc-list : family | cut -f1 -d"," | sort | uniq
