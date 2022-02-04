@@ -2,14 +2,7 @@ FROM pandoc/latex:2.16.2
 
 LABEL org.opencontainers.image.source https://github.com/goffinet/pandoc-latex
 
-RUN tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet \
-    tlmgr update \
-    && tlmgr install csquotes mdframed needspace sourcesanspro ly1 mweights \
-    sourcecodepro titling pagecolor epstopdf zref footnotebackref subfig float \
-    adjustbox babel-french background bidi collectbox csquotes everypage filehook \
-    footmisc footnotebackref framed fvextra letltxmacro sourcesanspro ucharcat \
-    ulem unicode-math upquote xecjk xurl \
-    && apk add --update ghostscript
+RUN apk add --update ghostscript texlive-full
 
 # Install Node and mermaid-filter
 
